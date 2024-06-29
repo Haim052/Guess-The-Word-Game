@@ -1,147 +1,80 @@
-# def main():
-#     lst_words = ["aba", "mama"]
-#     for i in range(len(lst_words)):
-#         current_word = prints_hidden_word(lst_words)
-#         print(current_word)
-
-#         check_letter_in_word(current_word)
-
-
-# def main1():
-#     points_player1 = 0
-#     points_player2 = 0
-#     for word in range(len(lst)):
-#             print(
-#                 f"player1 '{points_player1}' points\nplayer2 '{points_player2}' points"
-#             )
-
-
-# def main2():
-#     global lst_words
-#     global i
-#     new_hid_word = ""
-#     lst_players = {}
-#     lst_words = ["father", "math", "children"]
-#     sum_players = int(input("how much players: "))
-#     # for z in range(len(sum_players)):
-#     #     play1 = input("Enter your name: ")
-#     #     lst_players["play1"] = play1
-#     play1 = input("Enter your name: ")
-#     play2 = input("Enter your name: ")
-#
-#     for i in range(len(lst_words)):
-#         print(hidden_word(lst_words[i]))
-#         for word in lst_words[i]:
-#             re_player1 = player1()
-#             print(re_player1)
-
-
-# def main1():
-#     global hid_word
-#     global lst_words
-#     global word
-#     sum_points = 0
-#     lst_words = ["hello", "world"]
-#     # for word in range(len(lst_words)):
-#         # hid_word = len(lst_words[word]) * "*"
-#         guess = []
-#         print(f"the length of the word is: {hid_word}")
-#         while "*" in hid_word:
-#             print(f"The guesses so far are: {hid_word}")
-#             player_guess = input("Enter a guess: ")
-#             # בודק אם הכניסו רק תו אחד
-#             while len(player_guess) != 1:
-#                 player_guess = input(
-#                     "You entered more than one letter, please enter again a letter: "
-#                 )
-#             # בודק אם ניחשו כבר את האות
-#             while player_guess in guess:
-#                 player_guess = input(
-#                     "They already guessed the letter please enter again a letter:"
-#                 )
-#             guess.append(player_guess)
-#             hid_word, points = check_letter_in_word(hid_word, lst_words[word], player_guess)
-#             print(hid_word)
-#             print(points)
-#             sum_points += points
-#             print("-------------------------")
-#         print(f"total points: {sum_points}")
-
-
-# def hidden_word(word: str) -> str:
-#     """מחזירה את המילה כשהיא מוסתרת"""
-#     return len(word) * "*"
-
-
-def main2():
+def main():
     global hid_word
     global lst_words
     global word
+    global guess
+    global sum_points1
+    global sum_points2
     sum_points1 = 0
     sum_points2 = 0
     lst_words = ["hello", "world"]
+    lst1_words = ["Fruits", "Apple", "Banana", "Orange", "Pear", "Mango"]
+    global play1
+    global play2
+    play1 = input("Enter your name: ")
+    play2 = input("Enter your name: ")
     for word in range(len(lst_words)):
         hid_word = len(lst_words[word]) * "*"
         guess = []
         print(f"the length of the word is: {hid_word}")
 
-
         while "*" in hid_word:
-            print(f"player 1 The guesses so far are: {hid_word}")
-            player_guess1 = input("Enter a gusse: ")
-            while len(player_guess1) != 1:
-                player_guess1 = input(
-                    "You entered more than one letter, please enter again a letter: "
-                )
-            while player_guess1 in guess:
-                player_guess1 = input(
-                    "They already guessed the letter please enter again a letter:"
-                )
-            guess.append(player_guess1)
-            hid_word, points1 = check_letter_in_word(hid_word, lst_words[word], player_guess1)
-            sum_points1 += points1
-            print(f"you guessed so far {hid_word}")
-            print(f"your points are {points1}")
-            print("-----")
-
-
-
-            print(f"player 2 The guesses so far are: {hid_word}")
-            player_guess2 = input("Enter a gusse: ")
-            while len(player_guess2) != 1:
-                player_guess = input(
-                    "You entered more than one letter, please enter again a letter: "
-                )
-            while player_guess2 in guess:
-                player_guess2 = input(
-                    "They already guessed the letter please enter again a letter:"
-                )
-            guess.append(player_guess2)
-            hid_word, points1 = check_letter_in_word(hid_word, lst_words[word], player_guess2)
-            sum_points2 += points1
-            print(f"you guessed so far {hid_word}")
-            print(f"your points are {points1}")
-            print("-----")
-    print(f"the point are player1: {sum_points1} player2: {sum_points2}")
-
-
-
+            player1()
+            if "*" in hid_word:
+                player2()
+            else:
+                print("***the gmae is over***")
+                print(f"the point are player1: {sum_points1}, player2: {sum_points2}")
+                if sum_points1 > sum_points2:
+                    print("player 1 you are the winner!!!")
+                elif sum_points1 < sum_points2:
+                    print("player 2 you are the winner!!!")
 
 
 def player1():
-    sum_points1 = 0
-    player_gues = input("enter a gusse: ")
-    gue, sum_poin = check_letter_in_word(hid_word, lst_words[word], player_gues)
-    sum_points1 += sum_poin
-    return gue, sum_points1
+    global hid_word
+    global sum_points1
+    print(f"'{play1}' The guesses so far are: {hid_word}")
+    player_guess1 = input("Enter a gusse: ")
+    while len(player_guess1) != 1:
+        player_guess1 = input(
+            "You entered more than one letter, please enter again a letter: "
+        )
+    while player_guess1 in guess:
+        player_guess1 = input(
+            "They already guessed the letter please enter again a letter:"
+        )
+    guess.append(player_guess1)
+    hid_word, points1 = check_letter_in_word(
+        hid_word, lst_words[word], player_guess1.lower()
+    )
+    sum_points1 += points1
+    print(f"you guessed so far {hid_word}")
+    print(f"your points are {points1}")
+    print("-----")
 
 
 def player2():
-    sum_points1 = 0
-    player_gues = input("enter a gusse: ")
-    gue, sum_poin = check_letter_in_word(hid_word, lst_words[word], player_gues)
-    sum_points1 += sum_poin
-    return gue, sum_points1
+    global hid_word
+    global sum_points2
+    print(f"'{play2}' The guesses so far are: {hid_word}")
+    player_guess2 = input("Enter a gusse: ")
+    while len(player_guess2) != 1:
+        player_guess = input(
+            "You entered more than one letter, please enter again a letter: "
+        )
+    while player_guess2 in guess:
+        player_guess2 = input(
+            "They already guessed the letter please enter again a letter:"
+        )
+    guess.append(player_guess2)
+    hid_word, points1 = check_letter_in_word(
+        hid_word, lst_words[word], player_guess2.lower()
+    )
+    sum_points2 += points1
+    print(f"you guessed so far {hid_word}")
+    print(f"your points are {points1}")
+    print("-----")
 
 
 def checking_guess(real_word: str, hid_word: str, guesses: str) -> (int, str):
@@ -179,6 +112,4 @@ def check_letter_in_word(hid_word: str, word: str, letter: str) -> (int, str):
         return hid_word, sum_point
 
 
-# player1()
-# main1()
-main2()
+main()
