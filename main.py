@@ -17,7 +17,7 @@ def main():
         hid_word = len(lst_words[word]) * "*"
         guess = []
         print(f"the length of the word is: {hid_word}")
-#TODO check if it's alpha 
+        # TODO check if it's alpha
         while "*" in hid_word:
             player1()
             if "*" in hid_word:
