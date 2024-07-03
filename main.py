@@ -22,20 +22,19 @@ def main():
             player1()
             if "*" in hid_word:
                 player2()
-            else:
-                print("***the gmae is over***")
-                print(f"the point are player1: {sum_points1}, player2: {sum_points2}")
-                if sum_points1 > sum_points2:
-                    print("player 1 you are the winner!!!")
-                elif sum_points1 < sum_points2:
-                    print("player 2 you are the winner!!!")
+    print("***the game is over***")
+    print(f"the point are {play1} {sum_points1}, {play2} {sum_points2}")
+    if sum_points1 > sum_points2:
+        print(f"{play1} you are the winner!!!")
+    elif sum_points1 < sum_points2:
+        print(f"{play2} you are the winner!!!")
 
 
 def player1():
     global hid_word
     global sum_points1
     print(f"'{play1}' The guesses so far are: {hid_word}")
-    player_guess1 = input("Enter a gusse: ")
+    player_guess1 = input("Enter a guess: ")
     while len(player_guess1) != 1:
         player_guess1 = input(
             "You entered more than one letter, please enter again a letter: "
@@ -58,7 +57,7 @@ def player2():
     global hid_word
     global sum_points2
     print(f"'{play2}' The guesses so far are: {hid_word}")
-    player_guess2 = input("Enter a gusse: ")
+    player_guess2 = input("Enter a guess: ")
     while len(player_guess2) != 1:
         player_guess = input(
             "You entered more than one letter, please enter again a letter: "
@@ -77,10 +76,10 @@ def player2():
     print("-----")
 
 
-def checking_guess(real_word: str, hid_word: str, guesses: str) -> (int, str):
-    """בודקת אם נחשו את האות כבר
-    מחזיר שלא ניחושו - כן
-    קורא לפונקציה של הניחושים ומדפיסה את סך הנקודות לפי הניחושים - לא
+def checking_guess(real_word: str, hid_word: str, guesses: str) -> tuple:
+    """Checking if they have already guessed the letter
+    Yes - returns not guessed
+    No - calls the function of the guesses and prints the total points according to the guesses
     """
     while "*" in hid_word:
         player_guess = input("letter: ")
@@ -94,10 +93,10 @@ def checking_guess(real_word: str, hid_word: str, guesses: str) -> (int, str):
             return hid_word, points
 
 
-def check_letter_in_word(hid_word: str, word: str, letter: str) -> (int, str):
+def check_letter_in_word(hid_word: str, word: str, letter: str) -> tuple:
     """Gets the word when it is hidden and the guess of the letter
     and checks if it is a true guess,
-    if so it replaces the indeword with the letter and returns it
+    if so it replaces the inword with the letter and returns it
     if not it returns a level"""
     sum_point = 0
     if letter in word:
