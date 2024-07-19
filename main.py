@@ -8,7 +8,6 @@ def main():
     sum_points1 = 0
     sum_points2 = 0
     lst_words = ["hello", "world"]
-    lst1_words = ["Fruits", "Apple", "Banana", "Orange", "Pear", "Mango"]
     global play1
     global play2
     play1 = input("Enter your name: ")
